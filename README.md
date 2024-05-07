@@ -1,4 +1,8 @@
 
+                                MERAN STACK TOPICS COVERED IN CLASS
+                            --------------------------------------------
+    
+    -----------------------------------------
         HTML - HyperText Markup Languauge
     -----------------------------------------
 
@@ -50,8 +54,8 @@
 
 
     
-    
-    CSS - Cascading Style Sheet
+    ------------------------------------
+        CSS - Cascading Style Sheet
     ------------------------------------
 
     1. Used style html elements
@@ -109,8 +113,8 @@
             }
   
 
-
-    Bootstrap - Framework for CSS
+    ------------------------------------
+        Bootstrap - Framework for CSS
     -------------------------------------
 
     1. Build fast, responsive sites
@@ -131,8 +135,8 @@
         - d-flex justify-content-evenly align-items-center flex-row
            
            
-           
-    JAVASCRIPT - Programming Concepts
+    -----------------------------------------------       
+        JAVASCRIPT - Programming Concepts
     -----------------------------------------------
 
     1. Node JS - provide runtime environment and js library 
@@ -286,9 +290,9 @@
                 - Abstraction : hiding the important Data from user 
                 - Encapsulation : Data inside another data like class
         - Try-Catch-finally Block  : used to handle runtime error
-
-    JAVASCRIPT - Front end Concepts
-    --------------------------------
+    ------------------------------------------
+        JAVASCRIPT - Front end Concepts
+    ------------------------------------------  
 
     - Used to provide behavior to Web page
     - Ways to applying JS in HTML
@@ -368,8 +372,9 @@
         - fetch() : returns promise
         - axios library : return promise
 
-    REACT - ADVANCED Front end TECHNOLOGY
-    --------------------------------------
+    ------------------------------------------------
+        REACT - ADVANCED Front end TECHNOLOGY
+    -------------------------------------------------
 
     - Basic Concepts 
         - React App is a Collection of different Library 
@@ -480,7 +485,7 @@
                             - [data] : useEffect hook will call  at the time in compoenet creation as well as data changes
                 - Customised Hook : 
                     - Create a function with name starts with 'use' keyword
-        - Handling List using React
+        - Handling List/Array using React
             - using 'map' method
             - to uniquely identify each item in a list use 'key' attribute in component
         - Styling Frameworks in REACT                
@@ -497,3 +502,33 @@
             - using Route compoenet define each compoenet path 
             - Link compoenet used to redirect from one page to another within the app
         - Higher Order Component (HOC) : A compoenet is argument / props to another compoenet
+        - react-toastify : Library for notification in react - npm i react-toastify
+        - API Call in React
+            - Axios library : npm i axios
+            - Create folder for services
+
+
+        ----------------------------------------
+                JSON SERVER
+        ----------------------------------------
+        1. Create a folder to hold json file
+        2. Create package.json file inside the folder : npm init -y
+        3. Create db.json file inside the folder and resources as key to the json file
+        4. To run json file install json-server : npm i json-server / npm i json-server@0.17.4
+        5. To run json file in localhost use : npx json-server db.json / node index.js
+        -------------------------------------------------
+              Deploying A  JSON FILE  using NODE JS
+        -------------------------------------------------
+        1. Create index.js file server folder
+        2. update script in package.json file as "start":"node index.js"
+        3. create .gitignore file and add 'node_modules' folder
+        4. Define json-server to run json file in index.js
+            - import json-server
+            - create server run json file using create() method of jsonServer
+            - create middleware used by JSON Server.
+            - set up route for json file in server
+            - use middleware, route in server app
+            - listen the app in given port to resolve client request
+        5. To run the app, use 'node index.js'
+
+

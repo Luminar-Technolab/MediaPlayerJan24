@@ -1,30 +1,54 @@
 import React,{useState} from 'react'
 import { Card, Modal } from 'react-bootstrap'
+import { removeVideoAPI, saveHistoryAPI } from '../Services/allAPI';
 
-function VideoCard() {
+function VideoCard({displayData,setDeleteResponse,insideCategory}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+  const handleShow =  async () => {
+    setShow(true);
+    const {caption,youtubeURL} = displayData
+    const systemTime = new Date()
+    const formattedDate = systemTime.toLocaleString('en-US', { timeZoneName: 'short' });
+    console.log(formattedDate);
+    const videoHistory = {caption,youtubeURL,timeStamp:formattedDate}
+    try{
+      await saveHistoryAPI(videoHistory)
+    }catch(err){
+      console.log(err);
+    }
+  }
+  const handleRemoveVideo = async (videoId)=>{
+    try{
+      const result = await removeVideoAPI(videoId)
+      setDeleteResponse(result.data)
+    }catch(err){
+      console.log(err);
+    }
+  }
+  const dargStarted = (e,videoId)=>{
+    console.log(`Dragging started with video id: ${videoId}`);
+    e.dataTransfer.setData("videoId",videoId)
+  }
   return (
     <>
-      <Card >
-      <Card.Img onClick={handleShow} height={'180px'} variant="top" src="https://m.media-amazon.com/images/M/MV5BZjM5ODBkYTUtNjAwMy00MmY5LWEyZjEtMDg0Y2NlZjQyMzQ1XkEyXkFqcGdeQXVyMTQ3Mzk2MDg4._V1_FMjpg_UX1000_.jpg" />
+      <Card draggable={true} onDragStart={e=>dargStarted(e,displayData?.id)}>
+      <Card.Img onClick={handleShow} height={'150px'} variant="top" src={displayData?.imgURL} />
       <Card.Body>
         <Card.Title  className='d-flex justify-content-between'>
-          <p >Caption</p>
-          <button className='btn'><i className="fa-solid fa-trash text-danger"></i></button>
+          <p >{displayData?.caption}</p>
+          { !insideCategory && <button onClick={()=>handleRemoveVideo(displayData?.id)} className='btn'><i className="fa-solid fa-trash text-danger"></i></button>}
         </Card.Title>
       </Card.Body>
-    </Card>
+      </Card>
 
-    <Modal size='lg' show={show} onHide={handleClose}>
+      <Modal size='lg' show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Caption</Modal.Title>
+          <Modal.Title>{displayData?.caption}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <iframe width="100%" height="360" src="https://www.youtube.com/embed/L0yEMl8PXnw?autoplay=1" title="caption" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+        <iframe width="100%" height="360" src={`${displayData?.youtubeURL}?autoplay=1`} title="caption"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
         </Modal.Body>
       </Modal>
     </>
